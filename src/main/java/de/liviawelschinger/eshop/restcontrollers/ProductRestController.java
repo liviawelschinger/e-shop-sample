@@ -28,4 +28,11 @@ public class ProductRestController {
     public Mono<Product> findById(@PathVariable(name = "id") String id) {
         return productRepository.findById(id);
     }
+
+
+    // curl -X DELETE http://localhost:8085/api/rest/deleteProduct/id
+    @RequestMapping(value = "/deleteProduct/{id}", produces = "application/json", method = RequestMethod.DELETE)
+    public Mono<Void> deleteById(@PathVariable(name = "id") String id) {
+       return productRepository.deleteById(id);
+    }
 }

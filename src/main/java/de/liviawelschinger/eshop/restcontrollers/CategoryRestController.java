@@ -30,5 +30,11 @@ public class CategoryRestController {
         return  categoryRepository.findById(id);
     }
 
+    // curl -X DELETE http://localhost:8085/api/rest/deleteCategory/id
+    @RequestMapping(value = "/deleteCategory/{id}", produces = "application/json", method = RequestMethod.DELETE)
+    public Mono<Void> deleteById(@PathVariable(name = "id") String id) {
+        return categoryRepository.deleteById(id);
+    }
+
 
 }
