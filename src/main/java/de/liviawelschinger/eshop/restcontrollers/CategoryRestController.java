@@ -4,10 +4,7 @@ import de.liviawelschinger.eshop.entities.Category;
 import de.liviawelschinger.eshop.entities.Product;
 import de.liviawelschinger.eshop.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -34,6 +31,13 @@ public class CategoryRestController {
     @RequestMapping(value = "/deleteCategory/{id}", produces = "application/json", method = RequestMethod.DELETE)
     public Mono<Void> deleteById(@PathVariable(name = "id") String id) {
         return categoryRepository.deleteById(id);
+    }
+
+    //  curl -X POST -H "Content-Type: application/json" -d '{"name": "keyboards"}'  http://localhost:8085/api/rest/saveCategory
+    //  returns: {"id":"5d049be0c77b6d820faf6dff","name":"keyboards"}
+    @RequestMapping(value = "/saveCategory", consumes = "application/json" , produces = "application/json", method = RequestMethod.POST)
+    public Mono<Category> saveCategory(@RequestBody Category category) {
+      return categoryRepository.save(category);
     }
 
 
